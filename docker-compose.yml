@@ -1,0 +1,24 @@
+version: '3.5'
+
+services:
+  svelte:
+    restart: always
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    image: tst-spa:1.0.1
+    volumes: 
+      - /home/docker_share/ubuntu/data:/data
+      - ./front/src:/app/src
+    ports:
+      - 5050:5000
+      
+    networks:
+      - web_net
+
+networks:
+  web_net:
+    driver: bridge
+    #attachable: true
+    external: true
+    #internal: true
